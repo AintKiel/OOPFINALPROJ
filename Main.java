@@ -3,6 +3,10 @@ import java.time.Period;
 import java.util.Scanner;
 
 public class Main {
+    private static int qualifierCount = 0;
+    private static int age;
+    private static String firstName;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);  // Define the Scanner instance
         String text = "SCHOLARGATE";
@@ -34,8 +38,7 @@ public class Main {
             switch (lowerAgree) {
                 case 'y':
                     System.out.println("\nThank you for accepting the terms.");
-                    infoDetails(scanner); // Call the method to gather user details
-                    return; // Exit the program normally after the method call
+                    break;
 
                 case 'n':
                     System.out.println("You did not accept the terms. Application cannot proceed.");
@@ -44,6 +47,27 @@ public class Main {
 
                 default:
                     System.out.println("Invalid input. Please enter 'Y' for yes or 'N' for no."); // Prompt for valid input
+                    continue;
+            }
+
+            // Loop to submit application or exit
+            while (true) {
+                // Call the method to gather user details
+                infoDetails(scanner);
+
+                // Check eligibility
+                eligCriteria(scanner);
+
+                // Ask if the user wants to submit another application
+                System.out.print("\nWould you like to submit another application? (yes/no): ");
+                String response = scanner.nextLine().trim().toLowerCase();
+                infoDetails(scanner);
+
+                if (!response.equals("yes")) {
+                    System.out.println("Thank you for using the Scholarship Eligibility System. Goodbye!");
+                    scanner.close();
+                    System.exit(0);
+                }
             }
         }
     }
@@ -89,7 +113,7 @@ public class Main {
     public static void infoDetails(Scanner scanner) {
         // Collecting Full Name
         System.out.print("\n\nEnter your first name: ");
-        String firstName = scanner.nextLine();
+        firstName = scanner.nextLine();
 
         System.out.print("Enter your middle name (or press Enter to skip): ");
         String middleName = scanner.nextLine();
@@ -101,21 +125,16 @@ public class Main {
         System.out.print("Enter your birthdate (YYYY-MM-DD): ");
         String birthDateInput = scanner.nextLine();
         LocalDate birthDate = LocalDate.parse(birthDateInput);
-        int age = calculateAge(birthDate);
+        age = calculateAge(birthDate);
 
         // Collecting Gender (Optional)
         System.out.print("Enter your gender (M/F/Other): ");
         String genderInput = scanner.nextLine();
-        String gender; // Declare gender variable
-
-        // Determine gender based on input
-        if (genderInput.equalsIgnoreCase("M")) {
-            gender = "Male"; // If input is M, set gender to Male
-        } else if (genderInput.equalsIgnoreCase("F")) {
-            gender = "Female"; // If input is F, set gender to Female
-        } else {
-            gender = "Prefer not to say"; // Default case for other inputs
-        }
+        String gender = switch (genderInput.toLowerCase()) {
+            case "m" -> "Male";
+            case "f" -> "Female";
+            default -> "Prefer not to say";
+        };
 
         // Collecting Citizenship or Nationality
         System.out.print("Enter your nationality: ");
@@ -143,23 +162,12 @@ public class Main {
         System.out.println("1. Senior High School");
         System.out.println("2. College");
         System.out.print("Enter your choice (1 or 2): ");
-    
-        int educationChoice = scanner.nextInt(); // Use nextInt for numerical input
-        String educationLevel = "";
-
-        // Determine education level based on choice
-        switch (educationChoice) {
-            case 1:
-                educationLevel = "Senior High School";
-                break;
-            case 2:
-                educationLevel = "College";
-                break;
-            default:
-                System.out.println("Invalid choice. Setting education level to 'Not Specified'.");
-                educationLevel = "Not Specified"; // Default if invalid input
-                break;
-        }
+        int educationChoice = scanner.nextInt();
+        String educationLevel = switch (educationChoice) {
+            case 1 -> "Senior High School";
+            case 2 -> "College";
+            default -> "Not Specified";
+        };
         scanner.nextLine(); // Consume the newline character
 
         // Collecting Academic Institution
@@ -184,104 +192,89 @@ public class Main {
 
         while (true) {
             System.out.print("\nIs the information above correct? (Y/N): ");
-            char infoCheck = scanner.nextLine().charAt(0); // Get the first character of the input
+            char infoCheck = scanner.nextLine().charAt(0);
 
-            char lowerinfoCheck = Character.toLowerCase(infoCheck); // Convert to lowercase for comparison
+            char lowerInfoCheck = Character.toLowerCase(infoCheck);
 
-            switch (lowerinfoCheck) {
+            switch (lowerInfoCheck) {
                 case 'y':
                     System.out.println("\nProceeding to Eligibility Criteria.....");
-                    eligCriteria(); // Call the method to gather user details
-                    return; // Exit the program normally after the method call
-
+                    return;
                 case 'n':
                     System.out.println("Running Applicant's Information again");
                     infoDetails(scanner);
                     return;
                 default:
-                    System.out.println("Invalid input. Please enter 'Y' for yes or 'N' for no."); // Prompt for valid input
-        
-        scanner.close();
+                    System.out.println("Invalid input. Please enter 'Y' for yes or 'N' for no.");
             }
         }
     }
 
-
-    // Function to calculate age from birthdate
     public static int calculateAge(LocalDate birthDate) {
         LocalDate currentDate = LocalDate.now();
-        return Period.between(birthDate, currentDate).getYears(); // Calculate and return age
+        return Period.between(birthDate, currentDate).getYears();
     }
 
     public static void eligCriteria(Scanner scanner) {
         System.out.println("\n\n=== Eligibility Criteria ===");
+        String peso = "\u20B1";
 
-        // Collecting Academic Performance (GPA or Grades)
-        System.out.println("1. Academic Performance");
         System.out.print("Enter your GPA or Average Grade: ");
         double gpaOrGrade = scanner.nextDouble();
         scanner.nextLine(); // Consume newline left by nextDouble
 
-        // Collecting Financial Needs (Income Choices)
-        System.out.println("\n2. Financial Needs");
-        System.out.println("Please select your family income range:");
-        System.out.println("1. Below $20,000");
-        System.out.println("2. $20,000 - $50,000");
-        System.out.println("3. $50,000 - $100,000");
-        System.out.println("4. Above $100,000");
-        System.out.print("Enter your choice (1-4): ");
+        System.out.println("\nPlease select your family weekly income range:");
+        System.out.println("1. Below " + peso + "10,000");
+        System.out.println("2. " + peso + "10,000 - " + peso + "30,000");
+        System.out.println("3. " + peso + "30,000 - " + peso + "50,000");
+        System.out.println("4. " + peso + "50,000 - " + peso + "80,000");
+        System.out.println("5. Above " + peso + "80,000");
+        System.out.print("Enter your choice (1-5): ");
         int incomeChoice = scanner.nextInt();
         scanner.nextLine(); // Consume newline left by nextInt
 
-        String incomeRange;
-        switch (incomeChoice) {
-            case 1 -> incomeRange = "Below $20,000";
-            case 2 -> incomeRange = "$20,000 - $50,000";
-            case 3 -> incomeRange = "$50,000 - $100,000";
-            case 4 -> incomeRange = "Above $100,000";
-            default -> {
-                System.out.println("Invalid choice. Setting income range to 'Not Specified'.");
-                incomeRange = "Not Specified";
-            }
-        }
+        String incomeRange = switch (incomeChoice) {
+            case 1 -> "Below " + peso + "10,000";
+            case 2 -> peso + "10,000 - " + peso + "30,000";
+            case 3 -> peso + "30,000 - " + peso + "50,000";
+            case 4 -> peso + "50,000 - " + peso + "80,000";
+            case 5 -> "Above " + peso + "80,000";
+            default -> "Not Specified";
+        };
 
-        // Collecting Residency/Citizenship Requirements
-        System.out.println("\n3. Residency / Citizenship Requirements");
-        System.out.print("Enter your country of residence: ");
-        String countryOfResidence = scanner.nextLine();
-
-        System.out.print("Are you a citizen of this country? (Y/N): ");
-        char isCitizenChar = scanner.nextLine().charAt(0);
-        boolean isCitizen = (Character.toLowerCase(isCitizenChar) == 'y');
-
-        // Collecting Extra-Curricular Achievements
-        System.out.println("\n4. Extra-Curricular Achievements");
-        System.out.print("Enter your major achievements or extracurricular activities (or press Enter to skip): ");
-        String achievements = scanner.nextLine();
-
-        // Collecting Age Limitation
-        System.out.println("\n5. Age Limitations");
-        System.out.print("Enter your age: ");
-        int age = scanner.nextInt();
-        scanner.nextLine(); // Consume newline left by nextInt
-
-        // Display Collected Eligibility Information
         System.out.println("\n=== Eligibility Information ===");
-        System.out.println("GPA / Grade: " + gpaOrGrade);
+        System.out.println("GPA / Grade: " + String.format("%.2f", gpaOrGrade));
         System.out.println("Income Range: " + incomeRange);
-        System.out.println("Country of Residence: " + countryOfResidence);
-        System.out.println("Citizenship Status: " + (isCitizen ? "Citizen" : "Non-Citizen"));
-        System.out.println("Achievements / Extracurriculars: " + (achievements.isEmpty() ? "None" : achievements));
-        System.out.println("Age: " + age);
 
-        // Check if eligibility criteria are met based on basic conditions (example check)
-        boolean meetsEligibility = (gpaOrGrade >= 2.5) && (incomeChoice <= 3) && (age >= 16 && age <= 25);
+        boolean meetsEligibility = (gpaOrGrade <= 2.5) && (incomeChoice <= 3) && (age >= 16 && age <= 24);
+        String decision;
+
+        // Set the decision message based on eligibility
+        if (meetsEligibility) {
+        decision = "QUALIFIED";
+        } else {
+        decision = "Not Qualified";
+        }
 
         if (meetsEligibility) {
-            System.out.println("\nYou meet the basic eligibility criteria for the scholarship.");
-        } else {
-            System.out.println("\nUnfortunately, you do not meet the basic eligibility criteria.");
+            // Increment qualifier count and assign a serial number
+            qualifierCount++;
         }
+
+        String serNum = String.format("%04d", qualifierCount);
+
+        if (meetsEligibility) {
+            System.out.println(decision);
+            System.out.println("\n\nApplicant number: " + serNum);
+            System.out.println("\nCongratulations " + firstName + "! You meet the basic eligibility criteria for the scholarship.");
+            System.out.println("You can now proceed to the next step of the selection process.");
+            System.out.println("Please check your email for further instructions. You will soon receive an email with details \non the required documents to submit for a deeper analysis.");
+            System.out.println("Submitting these documents promptly will help finalize your qualification for the scholarship. Best of luck!\n\n");
+        } else {
+            System.out.println("Unfortunately, you do not meet the basic eligibility criteria for the scholarship.");
+        }
+
         scanner.close();
     }
 }
+
