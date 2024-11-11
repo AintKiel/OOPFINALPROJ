@@ -4,7 +4,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-// Interface for eligibility criteria
 interface EligibilityCriteria {
     boolean checkEligibility(int age, double gpaOrGrade, int incomeChoice, String country);
     boolean meetsGpaCriteria();
@@ -12,30 +11,26 @@ interface EligibilityCriteria {
     boolean meetsAgeCriteria();
     boolean meetsCountryCriteria();
 }
-// Abstract base class implementing shared eligibility criteria
+
 abstract class Eligibility implements EligibilityCriteria {
     protected boolean gpaCriteria;
     protected boolean ageCriteria;
     protected boolean incomeCriteria;
     protected boolean countryCriteria;
 
-    // Common method for checking country eligibility
     @Override
     public boolean meetsCountryCriteria() {
         return countryCriteria;
     }
 
-    // Common method for checking age eligibility
     @Override
     public boolean meetsAgeCriteria() {
         return ageCriteria;
     }
 
-    // Template method to check eligibility
     @Override
     public abstract boolean checkEligibility(int age, double gpaOrGrade, int incomeChoice, String country);
 
-    // Helper methods for checking common criteria
     protected void checkCommonCriteria(int age, int incomeChoice, String country) {
         ageCriteria = age >= 16 && age <= 24;
         incomeCriteria = incomeChoice <= 3;
@@ -43,7 +38,6 @@ abstract class Eligibility implements EligibilityCriteria {
     }
 }
 
-/// Senior High School eligibility implementation
 class SeniorHighSchoolEligibility extends Eligibility {
 
     @Override
@@ -64,7 +58,6 @@ class SeniorHighSchoolEligibility extends Eligibility {
     }
 }
 
-// College eligibility implementation
 class CollegeEligibility extends Eligibility {
 
     @Override
@@ -138,30 +131,25 @@ public class Scholargates {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         String text = "SCHOLARGATE";
 
-        // Add spaces between letters
         String spacedText = text.replaceAll("(.)", "$1 ");
 
-        // Styling
         String border = "*".repeat(spacedText.length() + 4);
         String paddedText = "* " + spacedText + "*";
 
-        // ANSI escape codes for blue text
         String blueText = "\u001B[34m";  // Blue color code
         String resetText = "\u001B[0m";  // Reset color code
 
-        // Display the styled text with blue color
-        System.out.println("\n\n\t" + blueText + border + resetText);
-        System.out.println("\t" + blueText + paddedText + resetText);
-        System.out.println("\t" + blueText + border + resetText);
+        System.out.println("\n\n\t   " + blueText + border + resetText);
+        System.out.println("\t   " + blueText + paddedText + resetText);
+        System.out.println("\t   " + blueText + border + resetText);
 
         System.out.println("\n\n=== Scholarship Terms and Conditions ===\n");
 
-        // Display scholarship terms and conditions
         displayTermsAndConditions();
 
-        // Loop to handle acceptance input
         while (true) {
             System.out.print("\nDo you accept these terms? (Y/N): ");
             String agreeInput = scanner.nextLine().trim().toLowerCase();
@@ -173,30 +161,42 @@ public class Scholargates {
                     System.out.println("\nThank you for accepting the terms.");
                     break;
                 case 'n':
-                    System.out.println("You did not accept the terms. Application cannot proceed.");
+                    System.out.println("\nYou did not accept the terms. Application cannot proceed.");
                     scanner.close();
                     System.exit(0);
                 default:
-                    System.out.println("Invalid input. Please enter 'Y' for yes or 'N' for no.");
+                    System.out.println("\nInvalid input. Please enter 'Y' for yes or 'N' for no.");
                     continue;
             }
 
-            // Loop to submit application or exit
+            clearScreen();
+
+
             while (true) {
+                clearScreen();
+            
                 infoDetails(scanner);
                 familyDetails(scanner);
                 eligCriteria(scanner);
-
+            
                 System.out.print("\nWould you like to submit another application? (Y/N): ");
                 String response = scanner.nextLine().trim().toLowerCase();
-
+            
                 if (!response.equals("y")) {
                     System.out.println("\nThank you for using the Scholarship Eligibility System. Goodbye!");
-                    scanner.close();
-                    System.exit(0);
+                    break; 
                 }
             }
+            
         }
+    }
+
+
+    public static void clearScreen() {
+        // ANSI escape code to clear the console screen and reset the cursor position
+        System.out.print("\u001B[2J");
+        System.out.flush();  // Ensure that the command is executed immediately
+        System.out.print("\u001B[H");  // Move the cursor to the top-left corner
     }
 
     // Function to display scholarship terms and conditions
@@ -242,10 +242,17 @@ public class Scholargates {
         String gender;
         LocalDate birthDate;
 
-        String border = "======================================";
+        String border = "===================================================";
+        // ANSI escape code for yellow
+        String yellow = "\u001B[33m";
+        // ANSI escape code to reset color
+        String reset = "\u001B[0m";
+
         System.out.println("\n" + border);
-        System.out.println("       APPLICANT'S INFORMATION           ");
+        System.out.println(yellow + "             APPLICANT'S INFORMATION           " + reset);
         System.out.println(border + "\n");
+
+        
         System.out.print("Enter your first name: ");
         firstName = scanner.nextLine();
 
@@ -325,13 +332,15 @@ public class Scholargates {
         System.out.print("Enter your extracurricular activities (or press Enter to skip): ");
         String extracurriculars = scanner.nextLine();
 
+        clearScreen();
+
         // Decorative Border Style using '=' characters
-        String topBorder = "===================================================";
-        String bottomBorder = "===================================================";
-        String divider = "===================================================";
+        String topBorder = "=====================================================";
+        String bottomBorder = "=====================================================";
+        String divider = "=====================================================";
 
         System.out.println("\n" + topBorder);
-        System.out.println("|               APPLICANT INFORMATION             |");
+        System.out.println( yellow + "|               APPLICANT INFORMATION               |" + reset);
         System.out.println(bottomBorder);
 
         System.out.println(divider);
@@ -362,10 +371,18 @@ public class Scholargates {
 
     // Main method for user input
     public static void familyDetails(Scanner scanner) {
-        String peso = "\u20B1";
-        System.out.println("\n***** FAMILY BACKGROUND *****");
 
-        // Father Details Section
+        clearScreen();
+
+        String peso = "\u20B1";
+        String yellow = "\u001B[33m";
+        String reset = "\u001B[0m";
+
+        System.out.println("\n\n==========================================");
+        System.out.println("      " + yellow + "***** FAMILY BACKGROUND *****" + reset);
+        System.out.println("==========================================");
+
+        // Father Information
         System.out.println("\n  -- Father Information --");
         System.out.print("\nEnter father's name: ");
         String fatherName = scanner.nextLine();
@@ -379,11 +396,11 @@ public class Scholargates {
         System.out.print("Enter father's monthly income: ");
         double fatherMonthlyIncome = scanner.nextDouble();
         scanner.nextLine(); // Consume newline
-    
-        // Father Educational Attainment
+
+        // Father's Educational Attainment
         String fatherEducationalAttainment;
         while (true) {
-            System.out.println("\nSelect your Father's highest educational attainment (1-6): ");
+            System.out.println("\nSelect Father's highest educational attainment (1-6): ");
             System.out.println("1. Elementary");
             System.out.println("2. Highschool Graduate");
             System.out.println("3. Highschool Undergraduate");
@@ -393,7 +410,7 @@ public class Scholargates {
             System.out.print("Choose between 1-6: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
-    
+
             fatherEducationalAttainment = switch (choice) {
                 case 1 -> "Elementary";
                 case 2 -> "Highschool Graduate";
@@ -403,11 +420,11 @@ public class Scholargates {
                 case 6 -> "College Undergraduate";
                 default -> null;
             };
-    
+
             if (fatherEducationalAttainment != null) break;
             System.out.println("Invalid choice. Please enter a number between 1 and 6.");
         }
-    
+
         // Father's Health Status
         String fatherHealthStatus;
         String fatherAdditionalInfo = ""; // For additional details
@@ -420,7 +437,7 @@ public class Scholargates {
             System.out.print("Choose between 1-4: ");
             int healthChoice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
-    
+
             fatherHealthStatus = switch (healthChoice) {
                 case 1 -> "Normal";
                 case 2 -> "Unalive";
@@ -428,9 +445,8 @@ public class Scholargates {
                 case 4 -> "Diseased";
                 default -> null;
             };
-    
+
             if (fatherHealthStatus != null) {
-                // Additional info if disability or diseased
                 if (healthChoice == 3) {
                     System.out.print("Please specify the type of disability: ");
                     fatherAdditionalInfo = scanner.nextLine();
@@ -438,17 +454,16 @@ public class Scholargates {
                     System.out.print("Please specify the type of disease: ");
                     fatherAdditionalInfo = scanner.nextLine();
                 }
-                break; // Exit the loop if valid choice
+                break;
             }
-    
             System.out.println("Invalid choice. Please enter a number between 1 and 4.");
         }
-    
+
         System.out.print("\nEnter father's contact number: ");
         String fatherContactNumber = scanner.nextLine();
-    
-        // Mother's Details Section
-        System.out.println("\n  -- Mother Details --");
+
+        // Mother's Details
+        System.out.println("\n  -- Mother Information --");
         System.out.print("\nEnter mother's name: ");
         String motherName = scanner.nextLine();
         System.out.print("Enter mother's age: ");
@@ -461,8 +476,8 @@ public class Scholargates {
         System.out.print("Enter mother's monthly income: ");
         double motherMonthlyIncome = scanner.nextDouble();
         scanner.nextLine(); // Consume newline
-    
-        // Mother Educational Attainment
+
+        // Mother's Educational Attainment
         String motherEducationalAttainment;
         while (true) {
             System.out.println("\nSelect Mother's highest educational attainment (1-6): ");
@@ -475,7 +490,7 @@ public class Scholargates {
             System.out.print("Choose between 1-6: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
-    
+
             motherEducationalAttainment = switch (choice) {
                 case 1 -> "Elementary";
                 case 2 -> "Highschool Graduate";
@@ -485,11 +500,11 @@ public class Scholargates {
                 case 6 -> "College Undergraduate";
                 default -> null;
             };
-    
+
             if (motherEducationalAttainment != null) break;
             System.out.println("Invalid choice. Please enter a number between 1 and 6.");
         }
-    
+
         // Mother's Health Status
         String motherHealthStatus;
         String motherAdditionalInfo = ""; // For additional details
@@ -502,7 +517,7 @@ public class Scholargates {
             System.out.print("Choose between 1-4: ");
             int healthChoice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
-    
+
             motherHealthStatus = switch (healthChoice) {
                 case 1 -> "Normal";
                 case 2 -> "Unalive";
@@ -510,9 +525,8 @@ public class Scholargates {
                 case 4 -> "Diseased";
                 default -> null;
             };
-    
+
             if (motherHealthStatus != null) {
-                // Additional info if disability or diseased
                 if (healthChoice == 3) {
                     System.out.print("Please specify the type of disability: ");
                     motherAdditionalInfo = scanner.nextLine();
@@ -520,15 +534,14 @@ public class Scholargates {
                     System.out.print("Please specify the type of disease: ");
                     motherAdditionalInfo = scanner.nextLine();
                 }
-                break; // Exit the loop if valid choice
+                break;
             }
-    
             System.out.println("Invalid choice. Please enter a number between 1 and 4.");
         }
-    
+
         System.out.print("\nEnter mother's contact number: ");
         String motherContactNumber = scanner.nextLine();
-    
+
         // General Family Information
         System.out.println("\n-- General Family Information --");
         System.out.print("Enter number of siblings: ");
@@ -561,9 +574,8 @@ public class Scholargates {
             if (familyIncome != null) break;
             System.out.println("Invalid choice. Please enter a number between 1 and 6.");
         }
-    
+
         // Housing Status
-        int housingStatus;
         String housingDescription = "";
         while (true) {
             System.out.println("\nSelect your family's housing situation (1-4): ");
@@ -572,10 +584,9 @@ public class Scholargates {
             System.out.println("3. Homeless");
             System.out.println("4. Not the owner of the house but renting or staying in it");
             System.out.print("Choose between 1-4: ");
-    
-            housingStatus = scanner.nextInt();
+            int housingStatus = scanner.nextInt();
             scanner.nextLine(); // Consume newline
-    
+
             housingDescription = switch (housingStatus) {
                 case 1 -> "Owns a house";
                 case 2 -> "Lives with others";
@@ -583,90 +594,104 @@ public class Scholargates {
                 case 4 -> "Not the owner of the house but renting or staying in it";
                 default -> null;
             };
-    
+
             if (housingDescription != null) break;
             System.out.println("Invalid choice. Please enter a number between 1 and 4.");
         }
 
-        // Output
+        clearScreen();
+
+        // Display Summary
         System.out.println("\n=============================================");
-        System.out.println("           Family Background Details      ");
+        System.out.println("      " + yellow + "***** FAMILY BACKGROUND *****" + reset);
         System.out.println("=============================================");
 
         // Father's Information
         System.out.println("\nFather's Information:");
         System.out.println("=============================================");
-        System.out.println("Name:            " + fatherName);
-        System.out.println("Age:             " + fatherAge);
-        System.out.println("Address:         " + fatherAddress);
-        System.out.println("Occupation:      " + fatherOccupation);
-        System.out.println("Monthly Income:  " + fatherMonthlyIncome);
-        System.out.println("Education:       " + fatherEducationalAttainment);
-        System.out.println("Health Status:   " + fatherHealthStatus + " - " + fatherAdditionalInfo);
-        System.out.println("Contact Number:  " + fatherContactNumber);
-
-        if (!fatherAdditionalInfo.isEmpty()) {
-            System.out.println("Additional Info: " + fatherAdditionalInfo);
-        }
-
-        System.out.println("=============================================");
+        System.out.printf("Name:             %s\n", fatherName);
+        System.out.printf("Age:              %d\n", fatherAge);
+        System.out.printf("Address:          %s\n", fatherAddress);
+        System.out.printf("Occupation:       %s\n", fatherOccupation);
+        System.out.printf("Monthly Income:   %.2f\n", fatherMonthlyIncome);
+        System.out.printf("Education:        %s\n", fatherEducationalAttainment);
+        System.out.printf("Health Status:    %s %s\n", fatherHealthStatus, fatherAdditionalInfo.isEmpty() ? "" : "- " + fatherAdditionalInfo);
+        System.out.printf("Contact Number:   %s\n", fatherContactNumber);
 
         // Mother's Information
         System.out.println("\nMother's Information:");
         System.out.println("=============================================");
-        System.out.println("Name:            " + motherName);
-        System.out.println("Age:             " + motherAge);
-        System.out.println("Address:         " + motherAddress);
-        System.out.println("Occupation:      " + motherOccupation);
-        System.out.println("Monthly Income:  " + motherMonthlyIncome);
-        System.out.println("Education:       " + motherEducationalAttainment);
-        System.out.println("Health Status:   " + motherHealthStatus + " - " + motherAdditionalInfo);
-        System.out.println("Contact Number:  " + motherContactNumber);
-
-        if (!motherAdditionalInfo.isEmpty()) {
-            System.out.println("Additional Info: " + motherAdditionalInfo);
-        }
-
-        System.out.println("=============================================");
+        System.out.printf("Name:             %s\n", motherName);
+        System.out.printf("Age:              %d\n", motherAge);
+        System.out.printf("Address:          %s\n", motherAddress);
+        System.out.printf("Occupation:       %s\n", motherOccupation);
+        System.out.printf("Monthly Income:   %.2f\n", motherMonthlyIncome);
+        System.out.printf("Education:        %s\n", motherEducationalAttainment);
+        System.out.printf("Health Status:    %s %s\n", motherHealthStatus, motherAdditionalInfo.isEmpty() ? "" : "- " + motherAdditionalInfo);
+        System.out.printf("Contact Number:   %s\n", motherContactNumber);
 
         // General Family Information
         System.out.println("\nGeneral Family Information:");
         System.out.println("=============================================");
-        System.out.println("Number of Siblings:      " + numberOfSiblings);
-        System.out.println("Number of Vehicles:      " + numberOfVehicles);
-        System.out.println("Family Monthly Income:   " + familyIncome);
-        System.out.println("House Description:       " + housingDescription);
+        System.out.printf("Number of Siblings:      %d\n", numberOfSiblings);
+        System.out.printf("Number of Vehicles:      %d\n", numberOfVehicles);
+        System.out.printf("Family Monthly Income:   %s\n", familyIncome);
+        System.out.printf("House Description:       %s\n", housingDescription);
 
+        // Confirmation
+        while (true) {
+            System.out.print("\nDo you confirm that the information provided is accurate? (Y/N): ");
+            char confirmation = scanner.nextLine().charAt(0);
+            if (Character.toLowerCase(confirmation) == 'y') break;
+            if (Character.toLowerCase(confirmation) == 'n') {
+                System.out.println("Please re-enter your details carefully.");
+                familyDetails(scanner);
+                return; // End this call to prevent infinite loops
+            } else {
+                System.out.println("Invalid input. Please enter Y or N.");
             }
-    
+        }
+    }
 
-    // Function to check eligibility criteria
+
     public static void eligCriteria(Scanner scanner) {
+        clearScreen();
         double gpaOrGrade;
-
+        // ANSI escape code for red
+        String red = "\u001B[31m";
+        String green = "\u001B[32m";
+        // ANSI escape code to reset color
+        String reset = "\u001B[0m";
+        
+        // Ask for GPA or Grade
         System.out.print("\nEnter your GPA (if in college) or Grade (if in high school): ");
         gpaOrGrade = scanner.nextDouble();
-
+        scanner.nextLine();  // Consume newline left-over
+    
+        // Check eligibility based on education level
         EligibilityCriteria eligibility;
         if (educationLevel.equals("Senior High School")) {
             eligibility = new SeniorHighSchoolEligibility();
         } else {
             eligibility = new CollegeEligibility();
         }
-
+    
+        clearScreen();
+    
         String decision = eligibility.checkEligibility(age, gpaOrGrade, incomeChoice, country) ? "QUALIFIED" : "Not Qualified";
-
+    
+        // If qualified
         if (eligibility.checkEligibility(age, gpaOrGrade, incomeChoice, country)) {
             qualifierCount++;
             String serNum = String.format("%04d", qualifierCount);
-        
+            
             // Decorate with borders and headings
             String border = "====================================================";
             System.out.println("\n" + border);
-            System.out.println("             *** CONGRATULATIONS! ***");
+            System.out.println("             " + green + "*** CONGRATULATIONS! ***" + reset);
             System.out.println(border);
             System.out.println("\nStatus: " + decision);
-        
+            
             System.out.println("\nApplicant Number: " + serNum);
             System.out.println("\nDear " + pronoun + ",");
             System.out.println("You have successfully met the basic eligibility criteria for the scholarship!");
@@ -680,11 +705,11 @@ public class Scholargates {
             // Design for the "Not Qualified" outcome
             String border = "****************************************************";
             System.out.println("\n" + border);
-            System.out.println("           *** SORRY, NOT QUALIFIED ***");
+            System.out.println("           " + red + "*** SORRY, NOT QUALIFIED ***" + reset);
             System.out.println(border);
             System.out.println("\nStatus: " + decision);
             System.out.println("\nUnfortunately, you do not meet the basic eligibility criteria for the scholarship.");
-        
+            
             // Display reasons for disqualification
             if (!eligibility.meetsGpaCriteria()) {
                 System.out.println("\nReason: Your grade does not meet the required threshold.");
@@ -701,6 +726,7 @@ public class Scholargates {
             System.out.println(border + "\n");
         }
     }
+    
     
     // Function to calculate age based on birthdate
     public static int calculateAge(LocalDate birthDate) {
