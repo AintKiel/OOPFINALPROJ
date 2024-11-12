@@ -371,32 +371,29 @@ public class Scholargates {
 
     // Main method for user input
     public static void familyDetails(Scanner scanner) {
-
         clearScreen();
-
+    
         String peso = "\u20B1";
         String yellow = "\u001B[33m";
         String reset = "\u001B[0m";
-
+    
         System.out.println("\n\n==========================================");
         System.out.println("      " + yellow + "***** FAMILY BACKGROUND *****" + reset);
         System.out.println("==========================================");
-
+    
         // Father Information
         System.out.println("\n  -- Father Information --");
         System.out.print("\nEnter father's name: ");
         String fatherName = scanner.nextLine();
         System.out.print("Enter father's age: ");
-        int fatherAge = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int fatherAge = Integer.parseInt(scanner.nextLine()); // Use nextLine() for consistency
         System.out.print("Enter father's address: ");
         String fatherAddress = scanner.nextLine();
         System.out.print("Enter father's occupation: ");
         String fatherOccupation = scanner.nextLine();
         System.out.print("Enter father's monthly income: ");
-        double fatherMonthlyIncome = scanner.nextDouble();
-        scanner.nextLine(); // Consume newline
-
+        double fatherMonthlyIncome = Double.parseDouble(scanner.nextLine()); // Use nextLine() and parse
+    
         // Father's Educational Attainment
         String fatherEducationalAttainment;
         while (true) {
@@ -408,9 +405,8 @@ public class Scholargates {
             System.out.println("5. College Graduate");
             System.out.println("6. College Undergraduate");
             System.out.print("Choose between 1-6: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
+            int choice = Integer.parseInt(scanner.nextLine()); // Use nextLine() and parse
+    
             fatherEducationalAttainment = switch (choice) {
                 case 1 -> "Elementary";
                 case 2 -> "Highschool Graduate";
@@ -420,11 +416,11 @@ public class Scholargates {
                 case 6 -> "College Undergraduate";
                 default -> null;
             };
-
+    
             if (fatherEducationalAttainment != null) break;
             System.out.println("Invalid choice. Please enter a number between 1 and 6.");
         }
-
+    
         // Father's Health Status
         String fatherHealthStatus;
         String fatherAdditionalInfo = ""; // For additional details
@@ -435,9 +431,8 @@ public class Scholargates {
             System.out.println("3. Person with disability");
             System.out.println("4. Diseased");
             System.out.print("Choose between 1-4: ");
-            int healthChoice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
+            int healthChoice = Integer.parseInt(scanner.nextLine()); // Use nextLine() and parse
+    
             fatherHealthStatus = switch (healthChoice) {
                 case 1 -> "Normal";
                 case 2 -> "Unalive";
@@ -445,7 +440,7 @@ public class Scholargates {
                 case 4 -> "Diseased";
                 default -> null;
             };
-
+    
             if (fatherHealthStatus != null) {
                 if (healthChoice == 3) {
                     System.out.print("Please specify the type of disability: ");
@@ -458,25 +453,23 @@ public class Scholargates {
             }
             System.out.println("Invalid choice. Please enter a number between 1 and 4.");
         }
-
+    
         System.out.print("\nEnter father's contact number: ");
         String fatherContactNumber = scanner.nextLine();
-
+    
         // Mother's Details
         System.out.println("\n  -- Mother Information --");
         System.out.print("\nEnter mother's name: ");
         String motherName = scanner.nextLine();
         System.out.print("Enter mother's age: ");
-        int motherAge = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int motherAge = Integer.parseInt(scanner.nextLine()); // Use nextLine() and parse
         System.out.print("Enter mother's address: ");
         String motherAddress = scanner.nextLine();
         System.out.print("Enter mother's occupation: ");
         String motherOccupation = scanner.nextLine();
         System.out.print("Enter mother's monthly income: ");
-        double motherMonthlyIncome = scanner.nextDouble();
-        scanner.nextLine(); // Consume newline
-
+        double motherMonthlyIncome = Double.parseDouble(scanner.nextLine()); // Use nextLine() and parse
+    
         // Mother's Educational Attainment
         String motherEducationalAttainment;
         while (true) {
@@ -488,9 +481,8 @@ public class Scholargates {
             System.out.println("5. College Graduate");
             System.out.println("6. College Undergraduate");
             System.out.print("Choose between 1-6: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
+            int choice = Integer.parseInt(scanner.nextLine()); // Use nextLine() and parse
+    
             motherEducationalAttainment = switch (choice) {
                 case 1 -> "Elementary";
                 case 2 -> "Highschool Graduate";
@@ -500,11 +492,11 @@ public class Scholargates {
                 case 6 -> "College Undergraduate";
                 default -> null;
             };
-
+    
             if (motherEducationalAttainment != null) break;
             System.out.println("Invalid choice. Please enter a number between 1 and 6.");
         }
-
+    
         // Mother's Health Status
         String motherHealthStatus;
         String motherAdditionalInfo = ""; // For additional details
@@ -515,9 +507,8 @@ public class Scholargates {
             System.out.println("3. Person with disability");
             System.out.println("4. Diseased");
             System.out.print("Choose between 1-4: ");
-            int healthChoice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
+            int healthChoice = Integer.parseInt(scanner.nextLine()); // Use nextLine() and parse
+    
             motherHealthStatus = switch (healthChoice) {
                 case 1 -> "Normal";
                 case 2 -> "Unalive";
@@ -525,7 +516,7 @@ public class Scholargates {
                 case 4 -> "Diseased";
                 default -> null;
             };
-
+    
             if (motherHealthStatus != null) {
                 if (healthChoice == 3) {
                     System.out.print("Please specify the type of disability: ");
@@ -538,17 +529,17 @@ public class Scholargates {
             }
             System.out.println("Invalid choice. Please enter a number between 1 and 4.");
         }
-
+    
         System.out.print("\nEnter mother's contact number: ");
         String motherContactNumber = scanner.nextLine();
-
+    
         // General Family Information
         System.out.println("\n-- General Family Information --");
-        System.out.print("Enter number of siblings: ");
-        int numberOfSiblings = scanner.nextInt();
+        System.out.print("\nEnter number of siblings: ");
+        int numberOfSiblings = Integer.parseInt(scanner.nextLine()); // Use nextLine() and parse
         System.out.print("Enter number of vehicle/s: ");
-        int numberOfVehicles = scanner.nextInt();
-
+        int numberOfVehicles = Integer.parseInt(scanner.nextLine()); // Use nextLine() and parse
+    
         String familyIncome;
         while (true) {
             System.out.println("\nPlease select your family weekly income range:");
@@ -558,12 +549,10 @@ public class Scholargates {
             System.out.println("4. " + peso + "51,000 - " + peso + "80,000");
             System.out.println("5. Above " + peso + "80,000");
             System.out.print("Enter your choice (1-5): ");
-            incomeChoice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
+            incomeChoice = Integer.parseInt(scanner.nextLine()); // Use nextLine() and parse
     
             familyIncome = switch (incomeChoice) {
-                case 1 ->  "Below " + peso + "10,000";
+                case 1 -> "Below " + peso + "10,000";
                 case 2 -> peso + "11,000 - " + peso + "30,000";
                 case 3 -> peso + "31,000 - " + peso + "50,000";
                 case 4 -> peso + "51,000 - " + peso + "80,000";
@@ -572,13 +561,13 @@ public class Scholargates {
             };
     
             if (familyIncome != null) break;
-            System.out.println("Invalid choice. Please enter a number between 1 and 6.");
+            System.out.println("Invalid choice. Please enter a number between 1 and 5.");
         }
-
+    
         // Housing Status
-        String housingDescription = "";
+        String housingDescription;
         while (true) {
-            System.out.println("\nSelect your family's housing situation (1-4): ");
+            System.out.println("\nHow would you describe your housing? (1-5): ");
             System.out.println("1. Owns a house");
             System.out.println("2. Lives with others");
             System.out.println("3. Homeless");
@@ -594,11 +583,11 @@ public class Scholargates {
                 case 4 -> "Not the owner of the house but renting or staying in it";
                 default -> null;
             };
-
+    
             if (housingDescription != null) break;
-            System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+            System.out.println("Invalid choice. Please enter a number between 1 and 5.");
         }
-
+    
         clearScreen();
 
         // Display Summary
@@ -652,22 +641,151 @@ public class Scholargates {
             }
         }
     }
-
-
+    
     public static void eligCriteria(Scanner scanner) {
         clearScreen();
         double gpaOrGrade;
-        // ANSI escape code for red
         String red = "\u001B[31m";
         String green = "\u001B[32m";
-        // ANSI escape code to reset color
+        String yellow = "\u001B[33m";
         String reset = "\u001B[0m";
+
+        System.out.println("\n=============================================");
+        System.out.println("      " + yellow + "***** EDUCATIONAL BACKGROUND *****" + reset);
+        System.out.println("=============================================");
+
+        if (educationLevel.equals("Senior High School")) {
+            //elementary info
+            System.out.println("\n\nElementary Background Information:");
+            System.out.println("=============================================");
+            System.out.print("\nEnter your school in Elementary: ");
+            String elemSchool = scanner.nextLine();
+            System.out.print("Enter the year you graduated: ");                        
+            int elemYearGrad = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Enter your General Average: ");
+            double elemGenAve = scanner.nextDouble();
+            scanner.nextLine(); 
+            
+            //high school info
+            System.out.println("\n\nJunior High School Background Information:");
+            System.out.println("=============================================");
+            System.out.print("\nEnter your school in Junior HighSchool: ");
+            String jhsSchool = scanner.nextLine();
+            System.out.print("Enter the year you graduated: ");
+            int jhsYearGrad = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Enter your General Average: ");
+            double jhsGenAve = scanner.nextDouble();
+            scanner.nextLine(); 
+
+            //senior high info
+            System.out.println("\n\nSenior High School Background Information:");
+            System.out.println("=============================================");
+            System.out.print("\nEnter your school in Senior HighSchool: ");
+            String shsSchool = scanner.nextLine();
+            System.out.print("Enter your strand: ");
+            String shsStrand = scanner.nextLine();
+            System.out.print("Enter your General Average: ");
+            gpaOrGrade = scanner.nextDouble();
+            scanner.nextLine();
+
+            clearScreen();
+            System.out.println("\n=============================================");
+            System.out.println("      " + yellow + "***** EDUCATIONAL BACKGROUND *****" + reset);
+            System.out.println("=============================================");
+            System.out.println("Elementary School: " + elemSchool + ", Year Graduated: " + elemYearGrad + ", Average: " + elemGenAve);
+            System.out.println("Junior High School: " + jhsSchool + ", Year Graduated: " + jhsYearGrad + ", Average: " + jhsGenAve);
+            System.out.println("Senior High School: " + shsSchool + ", Strand: " + shsStrand + ", Average: " + gpaOrGrade);
+
+            while (true) {
+                System.out.print("\nDo you confirm that the information provided is accurate? (Y/N): ");
+                char confirmation = scanner.nextLine().charAt(0);
+                if (Character.toLowerCase(confirmation) == 'y') break;
+                if (Character.toLowerCase(confirmation) == 'n') {
+                    System.out.println("Please re-enter your details carefully.");
+                    eligCriteria(scanner);
+                    return; // End this call to prevent infinite loops
+                } else {
+                    System.out.println("Invalid input. Please enter Y or N.");
+                }
+            }
+        } 
         
-        // Ask for GPA or Grade
-        System.out.print("\nEnter your GPA (if in college) or Grade (if in high school): ");
-        gpaOrGrade = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline left-over
-    
+        else {
+            //elementary info
+            System.out.println("\n\nElementary Background Information:");
+            System.out.println("=============================================");
+            System.out.print("\nEnter your school in Elementary: ");
+            String elemSchool = scanner.nextLine();
+            System.out.print("Enter the year you graduated: ");
+            int elemYearGrad = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Enter your General Average: ");
+            double elemGenAve = scanner.nextDouble();
+            scanner.nextLine(); 
+        
+            //high school info
+            System.out.println("\n\nJunior High School Background Information:");
+            System.out.println("=============================================");
+            System.out.print("\nEnter your school in Junior HighSchool: ");
+            String jhsSchool = scanner.nextLine();
+            System.out.print("Enter the year you graduated: ");
+            int jhsYearGrad = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Enter your General Average: ");
+            double jhsGenAve = scanner.nextDouble();
+            scanner.nextLine();
+
+            //senior high info
+            System.out.println("\n\nSenior High School Background Information:");
+            System.out.println("=============================================");
+            System.out.print("\nEnter your school in Senior HighSchool: ");
+            String shsSchool = scanner.nextLine();
+            System.out.print("Enter your strand: ");
+            String shsStrand = scanner.nextLine();
+            System.out.print("Enter the year you graduated (Leave blank if in Senior High School): ");
+            int shsYearGrad = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Enter your General Average: ");
+            double shsGenAve = scanner.nextDouble();
+            scanner.nextLine();
+
+            // College info
+            System.out.println("\n\nCollege Background Information:");
+            System.out.println("=============================================");
+            System.out.print("Enter your college: ");
+            String collegeSchool = scanner.nextLine();
+            System.out.print("Enter your program: ");
+            String colProgram = scanner.nextLine();  
+            System.out.print("Enter your GPA: ");
+            gpaOrGrade = scanner.nextDouble();
+            scanner.nextLine();  
+
+            clearScreen();
+            System.out.println("\n=============================================");
+            System.out.println("      " + yellow + "***** EDUCATIONAL BACKGROUND *****" + reset);
+            System.out.println("=============================================");
+            System.out.println("Elementary School: " + elemSchool + ", Year Graduated: " + elemYearGrad + ", Average: " + elemGenAve);
+            System.out.println("Junior High School: " + jhsSchool + ", Year Graduated: " + jhsYearGrad + ", Average: " + jhsGenAve);
+            System.out.println("Senior High School: " + shsSchool + ", Strand: " + shsStrand + ", Year Graduated: " + shsYearGrad + ", Average: " + shsGenAve);
+            System.out.println("Senior High School: " + collegeSchool + ", Program: " + colProgram + ", Average: " + gpaOrGrade);
+
+            while (true) {
+                System.out.print("\nDo you confirm that the information provided is accurate? (Y/N): ");
+                char confirmation = scanner.nextLine().charAt(0);
+                if (Character.toLowerCase(confirmation) == 'y') break;
+                if (Character.toLowerCase(confirmation) == 'n') {
+                    System.out.println("Please re-enter your details carefully.");
+                    eligCriteria(scanner);
+                    return; // End this call to prevent infinite loops
+                } else {
+                    System.out.println("Invalid input. Please enter Y or N.");
+                }
+            }
+        }
+
+
         // Check eligibility based on education level
         EligibilityCriteria eligibility;
         if (educationLevel.equals("Senior High School")) {
@@ -675,23 +793,19 @@ public class Scholargates {
         } else {
             eligibility = new CollegeEligibility();
         }
-    
+
         clearScreen();
-    
+
         String decision = eligibility.checkEligibility(age, gpaOrGrade, incomeChoice, country) ? "QUALIFIED" : "Not Qualified";
-    
-        // If qualified
+
         if (eligibility.checkEligibility(age, gpaOrGrade, incomeChoice, country)) {
             qualifierCount++;
             String serNum = String.format("%04d", qualifierCount);
-            
-            // Decorate with borders and headings
             String border = "====================================================";
             System.out.println("\n" + border);
             System.out.println("             " + green + "*** CONGRATULATIONS! ***" + reset);
             System.out.println(border);
             System.out.println("\nStatus: " + decision);
-            
             System.out.println("\nApplicant Number: " + serNum);
             System.out.println("\nDear " + pronoun + ",");
             System.out.println("You have successfully met the basic eligibility criteria for the scholarship!");
@@ -702,15 +816,13 @@ public class Scholargates {
             System.out.println("We wish you the best of luck in the selection process!");
             System.out.println(border + "\n\n");
         } else {
-            // Design for the "Not Qualified" outcome
             String border = "****************************************************";
             System.out.println("\n" + border);
             System.out.println("           " + red + "*** SORRY, NOT QUALIFIED ***" + reset);
             System.out.println(border);
             System.out.println("\nStatus: " + decision);
             System.out.println("\nUnfortunately, you do not meet the basic eligibility criteria for the scholarship.");
-            
-            // Display reasons for disqualification
+
             if (!eligibility.meetsGpaCriteria()) {
                 System.out.println("\nReason: Your grade does not meet the required threshold.");
             }
