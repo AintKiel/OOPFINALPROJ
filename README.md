@@ -1,5 +1,3 @@
-<img src="assets/SCHOLARGATE.png" alt="SCHOLARGATE Logo" width="200">
-
 ![SCHOLARGATE](https://github.com/user-attachments/assets/fcf88545-cd98-4608-a6e0-7092460daf00)
 
 # **Project Overview**
