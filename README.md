@@ -7,10 +7,16 @@
   The application covers eligibility for two education levels: **Senior High School** and **College**, and considers factors like **age, GPA, family income,** and **nationality** (restricted to residents of the Philippines).
 
 **Key Features:**
+
 User-friendly command-line interface for data input.
+
 Dynamic eligibility checks based on various criteria.
+
 Clear feedback on eligibility status, including specific reasons for rejection if not qualified.
-Preliminary Qualification Test: Meeting the basic criteria doesn’t guarantee final qualification, as applicants must go through a more in-depth analysis. This initial step is called the “GATE”—an eligibility test to determine initial suitability.
+
+Preliminary Qualification Test: Meeting the basic criteria doesn’t guarantee final qualification, as applicants must go through a more in-depth analysis. This initial step is called the “GATE”—an eligibility test 
+to determine initial suitability.
+
 This system is designed to be easy to use for students applying for scholarships and offers a transparent way to check basic qualifications.
 
 # **OOP Principles Applied**
