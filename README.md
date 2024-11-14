@@ -4,7 +4,7 @@
 
   The **Scholargates Scholarship Eligibility System** is a Java-based console application designed to assist students in determining their preliminary eligibility for a scholarship based on specific criteria. It provides an interactive interface for users to input their personal and academic details, check eligibility against predefined rules, and receive a real-time result.
 
-  The application covers eligibility for two education levels:**Senior High School** and **College**, and considers factors like **age, GPA, family income,** and **nationality** (restricted to residents of the Philippines).
+  The application covers eligibility for two education levels: **Senior High School** and **College**, and considers factors like **age, GPA, family income,** and **nationality** (restricted to residents of the Philippines).
 
 **Key Features:**
 User-friendly command-line interface for data input.
