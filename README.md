@@ -49,3 +49,21 @@ Scholarship for All: The application encourages students from underprivileged ba
 
 Inclusivity: The system checks eligibility based on academic performance (GPA), income levels, and age, providing an equal opportunity for students who meet the scholarship's criteria, regardless of their financial background.
 
+### Instruction for Running the Program
+
+1. **Use Visual Studio Code (VSCode)**  
+   Visual Studio Code (VSCode) is a recommended editor, but you can use any code editor you prefer.
+
+2. **Input Your Details**  
+   - Launch the program as specified in the setup, then follow the prompts to input your personal details.
+
+3. **Check and Confirm Your Details**  
+   - Before moving to the next page, double-check all details you've entered to ensure they’re accurate.
+
+4. **Submit Additional Applications if Needed**  
+   - If desired, you have the option to submit multiple applications through the program.
+
+5. **Await Email Confirmation if Qualified**  
+   - If your application meets the qualifications, you’ll receive an email with further instructions for the next steps.
+
+
