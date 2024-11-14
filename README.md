@@ -1,4 +1,6 @@
-![SCHOLARGATE](https://github.com/user-attachments/assets/21fc1cbd-82d8-4fe4-bc10-84ae0035e107)
+![SCHOLARGATE](https://github.com/user-attachments/assets/a1c69acf-39a4-43f3-9298-08ad24becaa8)
+
+<img src="assets/SCHOLARGATE.png" alt="SCHOLARGATE Logo" width="200">
 
 # **Project Overview**
 
