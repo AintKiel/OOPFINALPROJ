@@ -1,6 +1,6 @@
-![SCHOLARGATE](https://github.com/user-attachments/assets/a1c69acf-39a4-43f3-9298-08ad24becaa8)
-
 <img src="assets/SCHOLARGATE.png" alt="SCHOLARGATE Logo" width="200">
+
+![SCHOLARGATE](https://github.com/user-attachments/assets/fcf88545-cd98-4608-a6e0-7092460daf00)
 
 # **Project Overview**
 
