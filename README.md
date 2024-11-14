@@ -1,3 +1,5 @@
+![SCHOLARGATE](https://github.com/user-attachments/assets/21fc1cbd-82d8-4fe4-bc10-84ae0035e107)
+
 # **Project Overview**
 
   The **Scholargates Scholarship Eligibility System** is a Java-based console application designed to assist students in determining their preliminary eligibility for a scholarship based on specific criteria. It provides an interactive interface for users to input their personal and academic details, check eligibility against predefined rules, and receive a real-time result.
