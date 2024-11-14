@@ -1,4 +1,7 @@
-![SCHOLARGATE](https://github.com/user-attachments/assets/fcf88545-cd98-4608-a6e0-7092460daf00)
+<div align="center">
+  <img src="SCHOLARGATE.png" width="500" height="500">
+</div>
+
 
 # **Project Overview**
 
